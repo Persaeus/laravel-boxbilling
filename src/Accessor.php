@@ -4,7 +4,7 @@ namespace Nihilsen\FOSSBilling;
 
 use Nihilsen\FOSSBilling\Exceptions\UnexpectedAPIRoleException;
 
-class FOSSBilling
+class Accessor
 {
     /**
      * Get the API matching the $method

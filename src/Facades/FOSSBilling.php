@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Facade;
  * @method static string token()
  * @method static string url()
  *
- * @see \Nihilsen\FOSSBilling\FOSSBilling
+ * @see \Nihilsen\FOSSBilling\Accessor
  */
 class FOSSBilling extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Nihilsen\FOSSBilling\FOSSBilling::class;
+        return \Nihilsen\FOSSBilling\Accessor::class;
     }
 }
