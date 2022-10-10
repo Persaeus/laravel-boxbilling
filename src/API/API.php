@@ -20,8 +20,8 @@ abstract class API
     /**
      * Proxy calls to the API.
      *
-     * @param string $name
-     * @param array $arguments
+     * @param  string  $name
+     * @param  array  $arguments
      */
     public function __call($name, $arguments)
     {
@@ -31,8 +31,8 @@ abstract class API
     /**
      * Query the API with given $method and $parameters.
      *
-     * @param string $method
-     * @param array|null $parameters
+     * @param  string  $method
+     * @param  array|null  $parameters
      */
     protected function query(string $method, ?array $parameters)
     {

@@ -9,7 +9,7 @@ class FOSSBilling
     /**
      * Get the API matching the $method
      *
-     * @param string $method
+     * @param  string  $method
      */
     public function __call($method, $_)
     {
