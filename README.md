@@ -84,6 +84,9 @@ $version = FOSSBilling::guest()->system_version();
 # Get client by id (endpoint: admin/client/get)
 $client = FOSSBilling::admin()->client_get(id: 42);
 
+# Get client profile (endpoint: client/profile/get)
+$profile = FOSSBilling::client(id: 42)->profile_get();
+
 ```
 
 ## Testing
