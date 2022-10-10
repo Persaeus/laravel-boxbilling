@@ -2,7 +2,9 @@
 
 namespace Nihilsen\FOSSBilling\API;
 
+use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Nihilsen\FOSSBilling\Exceptions\APIErrorException;
 use Nihilsen\FOSSBilling\Facades\FOSSBilling;
@@ -10,6 +12,13 @@ use Nihilsen\FOSSBilling\Role;
 
 abstract class API
 {
+    /**
+     * The cookies for the request.
+     *
+     * @var \GuzzleHttp\Cookie\CookieJar|null
+     */
+    protected ?CookieJar $cookies;
+
     /**
      * The Role corresponding to this subset of the API endpoints.
      *
@@ -29,6 +38,51 @@ abstract class API
     }
 
     /**
+     * Get or set the cookies with the given $key.
+     *
+     * @param  string|null  $key
+     * @param  \GuzzleHttp\Cookie\CookieJar|null  $set
+     * @return \GuzzleHttp\Cookie\CookieJar|null
+     */
+    public function cookies(?string $key = null, ?CookieJar $set = null): ?CookieJar
+    {
+        if (is_null($key)) {
+            return $this->cookies($this->cookieKey(), $set);
+        }
+
+        $cacheKey = 'fossbilling.cookies:'.$key;
+
+        if (
+            $set &&
+            Cache::put($cacheKey, $set, $this->cookieTtl())
+        ) {
+            $this->cookies = $set;
+        }
+
+        return $this->cookies ??= cache($cacheKey);
+    }
+
+    /**
+     * Get the cache keys for cookies.
+     *
+     * @return string
+     */
+    protected function cookieKey(): string
+    {
+        return class_basename(static::class);
+    }
+
+    /**
+     * Get the cache ttl for cookies.
+     *
+     * @return \DateTimeInterface|\DateInterval|int
+     */
+    protected function cookieTtl(): \DateTimeInterface|\DateInterval|int
+    {
+        return now()->addMinutes(10);
+    }
+
+    /**
      * Query the API with given $method and $parameters.
      *
      * @param  string  $method
@@ -42,6 +96,8 @@ abstract class API
             ->lower();
 
         $response = $this->request()->post($endpoint, $parameters ?? []);
+
+        $this->cookies(set: $response->cookies());
 
         if ($error = $response->json('error')) {
             throw new APIErrorException($error);
@@ -57,6 +113,17 @@ abstract class API
      */
     public function request(): PendingRequest
     {
-        return Http::acceptJson()->baseUrl(FOSSBilling::url());
+        $request = Http::acceptJson()->baseUrl(FOSSBilling::url());
+
+        if ($cookies = $this->cookies()?->toArray()) {
+            return $request->withCookies(
+                domain: head($cookies)['Domain'],
+                cookies: collect($cookies)
+                    ->mapWithKeys(fn (array $cookie) => [$cookie['Name'] => $cookie['Value']])
+                    ->all()
+            );
+        }
+
+        return $request;
     }
 }
