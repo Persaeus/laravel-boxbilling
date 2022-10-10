@@ -31,8 +31,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Nihilsen\\FOSSBilling\\": "src",
-            "Nihilsen\\FOSSBilling\\Database\\Factories\\": "database/factories"
+            "Nihilsen\\FOSSBilling\\": "src"
         }
     },
     "autoload-dev": {
