@@ -1,36 +1,36 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace Nihilsen\FOSSBilling\Tests;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Http;
+use Nihilsen\FOSSBilling\ServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
 
 class TestCase extends Orchestra
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            ServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    /**
+     * {@inheritDoc}
+     */
+    protected function defineEnvironment($app)
     {
-        config()->set('database.default', 'testing');
+        /** @var \Illuminate\Config\Repository */
+        $config = $app['config'];
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_skeleton_table.php.stub';
-        $migration->up();
-        */
+        $config->set('fossbilling', [
+            'url' => 'https://fossbilling.invalid/api',
+            'token' => 'token',
+        ]);
+
+        Http::preventStrayRequests();
     }
 }
