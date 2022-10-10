@@ -1,19 +1,16 @@
-# A FOSSBilling API bridge for Laravel.
+# A minimalist FOSSBilling API bridge for Laravel.
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/nihilsen/laravel-fossbilling.svg?style=flat-square)](https://packagist.org/packages/nihilsen/laravel-fossbilling)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/nihilsen/laravel-fossbilling/run-tests?label=tests)](https://github.com/nihilsen/laravel-fossbilling/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/nihilsen/laravel-fossbilling/Fix%20PHP%20code%20style%20issues?label=code%20style)](https://github.com/nihilsen/laravel-fossbilling/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/nihilsen/laravel-fossbilling.svg?style=flat-square)](https://packagist.org/packages/nihilsen/laravel-fossbilling)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+This package adds a simple interface for interacting with the API of a [FOSSBilling](https://github.com/FOSSBilling/FOSSBilling) instance.
 
-## Support us
+Basic authentication via a token is supported for `Client` and `Admin` endpoints.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-fossbilling.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-fossbilling)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+> **Warning**
+> *FOSSBilling* is under active development but is currenly available as beta software. As such, parts of the API may still be subject to change.
 
 ## Installation
 
@@ -23,37 +20,70 @@ You can install the package via composer:
 composer require nihilsen/laravel-fossbilling
 ```
 
-You can publish and run the migrations with:
 
-```bash
-php artisan vendor:publish --tag="laravel-fossbilling-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
+If you wish, you may publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-fossbilling-config"
 ```
 
-This is the contents of the published config file:
+In the published config file, you may configure the `url` for the FOSSBilling instance as well as the `token` for authenticated requests:
 
 ```php
 return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Url
+    |--------------------------------------------------------------------------
+    |
+    | The base url for all FOSSBilling API requests.
+    |
+    */
+
+    'url' => env('FOSSBILLING_API_URL'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Token
+    |--------------------------------------------------------------------------
+    |
+    | The authentication token for authenticated API requests.
+    |
+    */
+
+    'token' => env('FOSSBILLING_API_TOKEN'),
+
 ];
 ```
 
-Optionally, you can publish the views using
+Alternatively, you may configure these options via your `.env` enviroment file:
 
-```bash
-php artisan vendor:publish --tag="laravel-fossbilling-views"
+```env
+
+FOSSBILLING_API_URL='https://fossbilling.tld/api'
+FOSSBILLING_API_TOKEN='your_secret_fossbilling_token'
+
 ```
 
 ## Usage
 
+API calls follow a format similar to that used internally in FOSSBilling.
+
+The starting point should always be the `Nihilsen\FOSSBilling\Facades\FOSSBilling` facade.
+
+Request parameters **MUST** be passed as *named parameters*.
+
 ```php
-$fOSSBilling = new Nihilsen\FOSSBilling();
-echo $fOSSBilling->echoPhrase('Hello, Nihilsen!');
+
+use Nihilsen\FOSSBilling\Facades\FOSSBilling;
+
+# Determine FOSSBilling version (endpoint: guest/system/version)
+$version = FOSSBilling::guest()->system_version();
+
+# Get client by id (endpoint: admin/client/get)
+$client = FOSSBilling::admin()->client_get(id: 42);
+
 ```
 
 ## Testing
@@ -69,10 +99,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
 
