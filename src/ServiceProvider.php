@@ -2,7 +2,6 @@
 
 namespace Nihilsen\FOSSBilling;
 
-use Nihilsen\FOSSBilling\Facades\FOSSBilling;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 

@@ -16,9 +16,9 @@ enum Role: string
     public function api(): API
     {
         return match ($this) {
-            self::Admin  => new Admin(),
+            self::Admin => new Admin(),
             self::Client => new Client(),
-            self::Guest  => new Guest(),
+            self::Guest => new Guest(),
         };
     }
 }
