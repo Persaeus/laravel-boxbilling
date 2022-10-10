@@ -70,7 +70,7 @@ FOSSBILLING_API_TOKEN='your_secret_fossbilling_token'
 
 API calls follow a format similar to that used internally in FOSSBilling.
 
-The starting point should always be the `Nihilsen\FOSSBilling\Facades\FOSSBilling` facade.
+The starting point should always be the `FOSSBilling` facade.
 
 Request parameters **MUST** be passed as *named parameters*.
 
