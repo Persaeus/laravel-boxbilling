@@ -12,6 +12,6 @@ class APIErrorException extends \RuntimeException
          */
         extract($error);
 
-        return parent::__construct("Request returned error code $code: '$message'.");
+        return parent::__construct("Request returned error code $code: '$message'.", $code);
     }
 }

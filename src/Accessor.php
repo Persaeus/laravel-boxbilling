@@ -20,6 +20,18 @@ class Accessor
         return $role->api();
     }
 
+    public function client(?int $id = null)
+    {
+        /** @var \Nihilsen\FOSSBilling\API\Client */
+        $api = Role::Client->api();
+
+        if (is_null($id)) {
+            return $api;
+        }
+
+        return $api->withId($id);
+    }
+
     /**
      * Get the authentication token for authenticated API requests.
      */

@@ -17,7 +17,7 @@ abstract class AuthenticatedAPI extends API
     /**
      * {@inheritDoc}
      */
-    final public function request(): PendingRequest
+    public function request(): PendingRequest
     {
         return parent::request()->withBasicAuth(
             $this->username,
