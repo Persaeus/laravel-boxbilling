@@ -27,7 +27,7 @@ it('can query authenticated api endpoint', function () {
             $request->url() == 'https://boxbilling.invalid/api/admin/system/messages' &&
             $request->hasHeader(
                 'Authorization',
-                'Basic ' . base64_encode('admin:token')
+                'Basic '.base64_encode('admin:token')
             )
         );
 
