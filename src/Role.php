@@ -1,11 +1,11 @@
 <?php
 
-namespace Nihilsen\FOSSBilling;
+namespace Nihilsen\BoxBilling;
 
-use Nihilsen\FOSSBilling\API\Admin;
-use Nihilsen\FOSSBilling\API\API;
-use Nihilsen\FOSSBilling\API\Client;
-use Nihilsen\FOSSBilling\API\Guest;
+use Nihilsen\BoxBilling\API\Admin;
+use Nihilsen\BoxBilling\API\API;
+use Nihilsen\BoxBilling\API\Client;
+use Nihilsen\BoxBilling\API\Guest;
 
 enum Role: string
 {

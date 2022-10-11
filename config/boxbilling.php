@@ -7,11 +7,11 @@ return [
     | Url
     |--------------------------------------------------------------------------
     |
-    | The base url for all FOSSBilling API requests.
+    | The base url for all BoxBilling API requests.
     |
     */
 
-    'url' => env('FOSSBILLING_API_URL'),
+    'url' => env('BOXBILLING_API_URL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -22,6 +22,6 @@ return [
     |
     */
 
-    'token' => env('FOSSBILLING_API_TOKEN'),
+    'token' => env('BOXBILLING_API_TOKEN'),
 
 ];

@@ -1,9 +1,9 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\API;
+namespace Nihilsen\BoxBilling\API;
 
 use Illuminate\Http\Client\PendingRequest;
-use Nihilsen\FOSSBilling\Facades\FOSSBilling;
+use Nihilsen\BoxBilling\Facades\BoxBilling;
 
 abstract class AuthenticatedAPI extends API
 {
@@ -27,6 +27,6 @@ abstract class AuthenticatedAPI extends API
 
     protected function token(): string
     {
-        return FOSSBilling::token();
+        return BoxBilling::token();
     }
 }

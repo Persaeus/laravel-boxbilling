@@ -1,6 +1,6 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\Exceptions;
+namespace Nihilsen\BoxBilling\Exceptions;
 
 class APIErrorException extends \RuntimeException
 {

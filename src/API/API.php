@@ -1,14 +1,14 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\API;
+namespace Nihilsen\BoxBilling\API;
 
 use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Nihilsen\FOSSBilling\Exceptions\APIErrorException;
-use Nihilsen\FOSSBilling\Facades\FOSSBilling;
-use Nihilsen\FOSSBilling\Role;
+use Nihilsen\BoxBilling\Exceptions\APIErrorException;
+use Nihilsen\BoxBilling\Facades\BoxBilling;
+use Nihilsen\BoxBilling\Role;
 
 abstract class API
 {
@@ -22,7 +22,7 @@ abstract class API
     /**
      * The Role corresponding to this subset of the API endpoints.
      *
-     * @var \Nihilsen\FOSSBilling\Role
+     * @var \Nihilsen\BoxBilling\Role
      */
     public readonly Role $role;
 
@@ -50,7 +50,7 @@ abstract class API
             return $this->cookies($this->cookieKey(), $set);
         }
 
-        $cacheKey = 'fossbilling.cookies:'.$key;
+        $cacheKey = 'boxbilling.cookies:'.$key;
 
         if (
             $set &&
@@ -113,7 +113,7 @@ abstract class API
      */
     public function request(): PendingRequest
     {
-        $request = Http::acceptJson()->baseUrl(FOSSBilling::url());
+        $request = Http::acceptJson()->baseUrl(BoxBilling::url());
 
         if ($cookies = $this->cookies()?->toArray()) {
             return $request->withCookies(

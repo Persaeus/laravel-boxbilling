@@ -1,12 +1,12 @@
 {
-    "name": "nihilsen/laravel-fossbilling",
-    "description": "A FOSSBilling API bridge for Laravel.",
+    "name": "nihilsen/laravel-boxbilling",
+    "description": "A BoxBilling API bridge for Laravel.",
     "keywords": [
         "nihilsen",
         "laravel",
-        "laravel-fossbilling"
+        "laravel-boxbilling"
     ],
-    "homepage": "https://github.com/nihilsen/laravel-fossbilling",
+    "homepage": "https://github.com/nihilsen/laravel-boxbilling",
     "license": "MIT",
     "authors": [
         {
@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Nihilsen\\FOSSBilling\\": "src"
+            "Nihilsen\\BoxBilling\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Nihilsen\\FOSSBilling\\Tests\\": "tests"
+            "Nihilsen\\BoxBilling\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -55,10 +55,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Nihilsen\\FOSSBilling\\ServiceProvider"
+                "Nihilsen\\BoxBilling\\ServiceProvider"
             ],
             "aliases": {
-                "FOSSBilling": "Nihilsen\\FOSSBilling\\Facades\\FOSSBilling"
+                "BoxBilling": "Nihilsen\\BoxBilling\\Facades\\BoxBilling"
             }
         }
     },

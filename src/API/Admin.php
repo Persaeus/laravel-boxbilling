@@ -1,6 +1,6 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\API;
+namespace Nihilsen\BoxBilling\API;
 
 /**
  * @method mixed client_login(int $id)

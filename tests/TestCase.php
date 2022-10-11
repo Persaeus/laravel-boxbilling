@@ -1,9 +1,9 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\Tests;
+namespace Nihilsen\BoxBilling\Tests;
 
 use Illuminate\Support\Facades\Http;
-use Nihilsen\FOSSBilling\ServiceProvider;
+use Nihilsen\BoxBilling\ServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -26,8 +26,8 @@ class TestCase extends Orchestra
         /** @var \Illuminate\Config\Repository */
         $config = $app['config'];
 
-        $config->set('fossbilling', [
-            'url' => 'https://fossbilling.invalid/api',
+        $config->set('boxbilling', [
+            'url' => 'https://boxbilling.invalid/api',
             'token' => 'token',
         ]);
 

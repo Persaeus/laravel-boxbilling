@@ -1,3 +1,3 @@
 # Changelog
 
-All notable changes to `laravel-fossbilling` will be documented in this file.
+All notable changes to `laravel-boxbilling` will be documented in this file.
