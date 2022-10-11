@@ -25,7 +25,7 @@ class Client extends AuthenticatedAPI
             return $key;
         }
 
-        return $key . ':' . $this->id;
+        return $key.':'.$this->id;
     }
 
     /**
@@ -53,7 +53,7 @@ class Client extends AuthenticatedAPI
             // If authentication error...
             if (
                 $this->id &&
-                !$this->loggedIn &&
+                ! $this->loggedIn &&
                 $th->getCode() == '204'
             ) {
                 $this->logIn();

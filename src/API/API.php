@@ -50,7 +50,7 @@ abstract class API
             return $this->cookies($this->cookieKey(), $set);
         }
 
-        $cacheKey = 'boxbilling.cookies:' . $key;
+        $cacheKey = 'boxbilling.cookies:'.$key;
 
         if (
             $set &&
