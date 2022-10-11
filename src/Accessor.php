@@ -1,8 +1,8 @@
 <?php
 
-namespace Nihilsen\FOSSBilling;
+namespace Nihilsen\BoxBilling;
 
-use Nihilsen\FOSSBilling\Exceptions\UnexpectedAPIRoleException;
+use Nihilsen\BoxBilling\Exceptions\UnexpectedAPIRoleException;
 
 class Accessor
 {
@@ -22,7 +22,7 @@ class Accessor
 
     public function client(?int $id = null)
     {
-        /** @var \Nihilsen\FOSSBilling\API\Client */
+        /** @var \Nihilsen\BoxBilling\API\Client */
         $api = Role::Client->api();
 
         if (is_null($id)) {
@@ -37,7 +37,7 @@ class Accessor
      */
     public function token()
     {
-        return config('fossbilling.token');
+        return config('boxbilling.token');
     }
 
     /**
@@ -45,6 +45,6 @@ class Accessor
      */
     public function url()
     {
-        return config('fossbilling.url');
+        return config('boxbilling.url');
     }
 }

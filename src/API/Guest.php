@@ -1,9 +1,9 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\API;
+namespace Nihilsen\BoxBilling\API;
 
 /**
- * @method string system_version() Get FOSSBilling version
+ * @method string system_version() Get BoxBilling version
  */
 class Guest extends API
 {

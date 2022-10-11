@@ -1,6 +1,6 @@
 <?php
 
-namespace Nihilsen\FOSSBilling;
+namespace Nihilsen\BoxBilling;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -15,7 +15,7 @@ class ServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-fossbilling')
+            ->name('laravel-boxbilling')
             ->hasConfigFile();
     }
 }

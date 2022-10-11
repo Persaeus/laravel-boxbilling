@@ -1,10 +1,10 @@
 <?php
 
-namespace Nihilsen\FOSSBilling\API;
+namespace Nihilsen\BoxBilling\API;
 
 use Illuminate\Http\Client\PendingRequest;
-use Nihilsen\FOSSBilling\Exceptions\APIErrorException;
-use Nihilsen\FOSSBilling\Facades\FOSSBilling;
+use Nihilsen\BoxBilling\Exceptions\APIErrorException;
+use Nihilsen\BoxBilling\Facades\BoxBilling;
 
 class Client extends AuthenticatedAPI
 {
@@ -25,7 +25,7 @@ class Client extends AuthenticatedAPI
             return $key;
         }
 
-        return $key.':'.$this->id;
+        return $key . ':' . $this->id;
     }
 
     /**
@@ -33,7 +33,7 @@ class Client extends AuthenticatedAPI
      */
     protected function logIn()
     {
-        $adminAPI = FOSSBilling::admin();
+        $adminAPI = BoxBilling::admin();
 
         $adminAPI->client_login(id: $this->id);
 
@@ -53,7 +53,7 @@ class Client extends AuthenticatedAPI
             // If authentication error...
             if (
                 $this->id &&
-                ! $this->loggedIn &&
+                !$this->loggedIn &&
                 $th->getCode() == '204'
             ) {
                 $this->logIn();
