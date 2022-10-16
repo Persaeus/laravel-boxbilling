@@ -4,14 +4,21 @@ namespace Nihilsen\BoxBilling\API;
 
 use GuzzleHttp\Cookie\CookieJar;
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Nihilsen\BoxBilling\Collection;
 use Nihilsen\BoxBilling\Exceptions\APIErrorException;
 use Nihilsen\BoxBilling\Facades\BoxBilling;
 use Nihilsen\BoxBilling\Role;
 
 abstract class API
 {
+    /**
+     * The keys of parameters that should always be submitted as GET parameters.
+     */
+    public const GET_PARAMETERS = ['page', 'per_page'];
+
     /**
      * The cookies for the request.
      *
@@ -86,16 +93,26 @@ abstract class API
      * Query the API with given $method and $parameters.
      *
      * @param  string  $method
-     * @param  array|null  $parameters
+     * @param  array  $parameters
+     * @return mixed|\Nihilsen\BoxBilling\Collection
      */
-    protected function query(string $method, ?array $parameters)
+    public function query(string $method, array $parameters)
     {
+        // Partition parameters into GET and POST parameters.
+        [$get, $post] = collect($parameters)
+            ->partition(fn ($_, $key) => in_array($key, static::GET_PARAMETERS))
+            ->toArray();
+
         $endpoint = str($method)
             ->replaceFirst('_', '/')
             ->prepend(class_basename($this), '/')
+            ->append('?', Arr::query($get))
             ->lower();
 
-        $response = $this->request()->post($endpoint, $parameters ?? []);
+        $response = $this->request()->post(
+            $endpoint,
+            $post
+        );
 
         $this->cookies(set: $response->cookies());
 
@@ -103,7 +120,18 @@ abstract class API
             throw new APIErrorException($error);
         }
 
-        return $response->json('result');
+        $result = $response->json('result');
+
+        if (Collection::canCollect($result)) {
+            return Collection::collectResultFromAPI(
+                $result,
+                $this,
+                $method,
+                $parameters
+            );
+        }
+
+        return $result;
     }
 
     /**
