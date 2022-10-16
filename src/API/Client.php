@@ -45,7 +45,7 @@ class Client extends AuthenticatedAPI
     /**
      * {@inheritDoc}
      */
-    protected function query(string $method, ?array $parameters)
+    public function query(string $method, ?array $parameters)
     {
         try {
             return parent::query($method, $parameters);
