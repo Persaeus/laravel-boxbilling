@@ -85,6 +85,20 @@ $profile = BoxBilling::client(id: 42)->profile_get();
 
 ```
 
+### Paginated results
+
+Paginated results are collected into a `Nihilsen\BoxBilling\Collection` instance, which is subclass of `Illuminate\Support\LazyCollection`.
+
+```php
+use Nihilsen\BoxBilling\Facades\BoxBilling;
+
+/** @var Nihilsen\BoxBilling\Collection **/
+$tickets = BoxBilling::admin()->support_ticket_get_list(page: 1, per_page: 10);
+
+# Select a random ticket 
+$ticket = $tickets->random();
+```
+
 ## Testing
 
 ```bash
