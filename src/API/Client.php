@@ -6,6 +6,9 @@ use Illuminate\Http\Client\PendingRequest;
 use Nihilsen\BoxBilling\Exceptions\APIErrorException;
 use Nihilsen\BoxBilling\Facades\BoxBilling;
 
+/**
+ * @method mixed support_ticket_get_list(string|null $status = null, string|null $date_from = null, string|null $date_to = null, int|null $page = null, int|null $per_page = null) Get client tickets list. $date_from and $date_to can be any string parsable by strtotime().
+ */
 class Client extends AuthenticatedAPI
 {
     protected bool $loggedIn = false;
