@@ -3,7 +3,7 @@
 namespace Nihilsen\BoxBilling\Tests;
 
 use Illuminate\Support\Facades\Http;
-use Nihilsen\BoxBilling\ServiceProvider;
+use Nihilsen\BoxBilling\BoxBillingServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -14,7 +14,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ServiceProvider::class,
+            BoxBillingServiceProvider::class,
         ];
     }
 

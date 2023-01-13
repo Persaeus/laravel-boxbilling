@@ -55,7 +55,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Nihilsen\\BoxBilling\\ServiceProvider"
+                "Nihilsen\\BoxBilling\\BoxBillingServiceProvider"
             ],
             "aliases": {
                 "BoxBilling": "Nihilsen\\BoxBilling\\Facades\\BoxBilling"
